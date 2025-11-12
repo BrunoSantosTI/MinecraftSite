@@ -5,3 +5,4 @@ Repositório destinado ao site sobre o jogo Minecraft.
 https://startbootstrap.com/previews/creative
 
 ## Link do MinecraftSite
+https://brunosantosti.github.io/MinecraftSite/startbootstrap-creative-gh-pages/index.html
