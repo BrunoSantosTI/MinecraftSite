@@ -130,7 +130,6 @@ hr {
   margin: 1rem 0;
   color: inherit;
   border: 0;
-  border-top: 1px solid;
   opacity: 0.25;
 }
 
@@ -11020,7 +11019,7 @@ header.masthead h1, header.masthead .h1 {
   text-align: center;
   opacity: 0;
   color: #fff;
-  background: rgba(244, 98, 58, 0.9);
+  background: #4e8b36c5;
   transition: opacity 0.25s ease;
   text-align: center;
 }
@@ -11038,11 +11037,43 @@ header.masthead h1, header.masthead .h1 {
   opacity: 1;
 }
 
+/* Portfolio image alignment: make all boxes same height and crop images */
+#portfolio .portfolio-box {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  height: 220px; /* default height for small screens */
+}
+
+#portfolio .portfolio-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  #portfolio .portfolio-box {
+    height: 260px;
+  }
+}
+
+@media (min-width: 992px) {
+  #portfolio .portfolio-box {
+    height: 320px;
+  }
+}
+
+
 /* Timeline Styles */
 #timeline {
   padding-top: 2rem !important;
   padding-bottom: 4rem !important;
-  background-color: #f8f9fa !important;
+  background-color: #4E8B36 !important;
+}
+
+#timeline h2{
+  color: #fff;
 }
 
 .timeline-container {
