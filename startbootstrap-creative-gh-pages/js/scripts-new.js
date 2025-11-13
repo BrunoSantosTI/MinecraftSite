@@ -49,7 +49,9 @@ window.addEventListener('DOMContentLoaded', event => {
                 navbarToggler.click();
             }
         });
-    });    // Activate SimpleLightbox plugin for portfolio items
+    });
+
+    // Activate SimpleLightbox plugin for portfolio items
     new SimpleLightbox({
         elements: '#portfolio a.portfolio-box'
     });
@@ -59,31 +61,32 @@ window.addEventListener('DOMContentLoaded', event => {
     const timelineEvents = document.querySelectorAll('.timeline-event');
     const timelineMarkers = document.querySelectorAll('.timeline-marker');
     const timelineProgress = document.querySelector('.timeline-progress');
+    const timelineTrack = document.querySelector('.timeline-track');
 
     if (timelineRange && timelineEvents.length > 0) {
         // Initialize first event and marker
         timelineEvents[0].classList.add('active');
         timelineMarkers[0].classList.add('active');
-        updateTimelineProgress();
+        updateProgress();
 
         // Handle range input
         timelineRange.addEventListener('input', (e) => {
             const currentIndex = parseInt(e.target.value);
             
             // Update active event
-            timelineEvents.forEach((event) => {
+            timelineEvents.forEach((event, index) => {
                 event.classList.remove('active');
             });
             timelineEvents[currentIndex].classList.add('active');
             
             // Update active marker
-            timelineMarkers.forEach((marker) => {
+            timelineMarkers.forEach((marker, index) => {
                 marker.classList.remove('active');
             });
             timelineMarkers[currentIndex].classList.add('active');
             
             // Update progress bar
-            updateTimelineProgress();
+            updateProgress();
         });
 
         // Handle marker clicks
@@ -94,14 +97,13 @@ window.addEventListener('DOMContentLoaded', event => {
             });
         });
 
-        function updateTimelineProgress() {
+        function updateProgress() {
             const value = (timelineRange.value / timelineRange.max) * 100;
             timelineProgress.style.width = value + '%';
         }
 
         // Update progress on window resize
-        window.addEventListener('resize', updateTimelineProgress);
+        window.addEventListener('resize', updateProgress);
     }
 
 });
-
