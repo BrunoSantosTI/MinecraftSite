@@ -5821,6 +5821,9 @@ textarea.form-control-lg {
 }
 
 .carousel {
+  padding: 1%;
+  background-color: #4E8B36;
+  border-radius: 5px;
   position: relative;
 }
 
