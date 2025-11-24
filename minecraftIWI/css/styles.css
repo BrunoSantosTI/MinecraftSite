@@ -29,6 +29,22 @@ Fonte
   --cinza-pedra: #7D7D7D;
   --preto-carvao: #2B2B2B;
   --bege-fundo: #EAE2C8;
+  
+  /* Tons principais (Sculk / Escuridão) */
+  --deepdark-black: #0A0F14;
+  --deepdark-petroleum: #0F1720;
+  --deepdark-shadow: #131F26;
+  --deepdark-slate: #1B2B34;
+
+  /* Tons de brilho (Sculk / Soul) */
+  --deepdark-glow-dark: #1F4F5B;
+  --deepdark-glow: #2E8F99;
+  --deepdark-glow-bright: #3FD0D4;
+
+  /* Tons de contraste / detalhes */
+  --deepdark-graphite: #2A3338;
+  --deepdark-steel-dark: #39464C;
+  --deepdark-steel: #4B5B63;
 }
 
 :root {
@@ -7700,6 +7716,8 @@ textarea.form-control-lg {
 
 .mb-4 {
   margin-bottom: 1.5rem !important;
+  color: #1F4F5B !important;
+  text-shadow: #0dcaf0 0 1px 1px !important;
 }
 
 .mb-5 {
@@ -8200,7 +8218,7 @@ textarea.form-control-lg {
 
 .bg-dark {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #0F1720 !important;
 }
 
 .bg-black {
