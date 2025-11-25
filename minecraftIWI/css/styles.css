@@ -11346,3 +11346,59 @@ header.masthead h1, header.masthead .h1 {
   display: flex;
   flex-direction: row ;
 }
+
+.pulse-section {
+    height: 100vh;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 10; /* Garante que o conteúdo fique por cima do overlay */
+}
+
+/* 🎨 Estilo do Overlay (a camada que escurece as bordas) */
+.overlay-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9; /* Abaixo da seção */
+    pointer-events: none; /* Permite interagir com o conteúdo por baixo */
+    opacity: 0; /* Começa invisível */
+    transition: opacity 0.5s ease-in-out;
+    
+    /* Degradê Radial: Transparente no centro, Escuro/Preto nas bordas */
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 0, 0, 0) 0%, /* Totalmente transparente no centro */
+        rgba(0, 0, 0, 0) 60%, /* Transparente até 60% */
+        rgba(0, 0, 0, 0.9) 100% /* Opacidade de 90% (quase preto) nas bordas */
+    );
+}
+
+/* Classe ativada pelo JavaScript para mostrar e pulsar o overlay */
+.overlay-active {
+    opacity: 1; /* Torna o overlay visível */
+    animation: pulseGlow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Animação de pulso */
+}
+
+/* 🌟 Keyframes para o efeito "Pulsar" */
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.01); /* Um pequeno aumento para simular pulso */
+    }
+    100% {
+        opacity: 0; /* Desaparece após o pulso */
+        transform: scale(1);
+    }
+}
