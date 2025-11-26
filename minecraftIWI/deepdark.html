@@ -19,7 +19,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
-    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/minecraftIWI/css/deepdark.css">
+
 </head>
 
 <body id="page-top">
@@ -27,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
             <div>
-                <img src="assets/img/FaviconMine.png" alt="Logo" style="width:40px;height:40px;margin-right:10px;" />
+                <img src="assets/img/FaviconDeepDark.png" alt="Logo" style="width:40px;height:40px;margin-right:10px;" />
             </div>
             <a class="navbar-brand" href="#page-top">FandomCraft</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
@@ -36,7 +37,6 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#about">Minecraft?</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">História</a></li>
                     <li class="nav-item"><a class="nav-link" href="#timeline">TimeLine</a></li>
                     <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -62,6 +62,10 @@
             </div>
         </div>
     </header>
+    <!-- Floating back-to-index button (fixed bottom-right, circular) -->
+    <a href="index.html" class="btn btn-light shadow rounded-circle back-to-index-btn" id="backToIndexBtn" aria-label="Voltar para a página inicial" title="Voltar para a página inicial" aria-hidden="true" tabindex="-1">
+        <i class="bi bi-arrow-left"></i>
+    </a>
     <!-- About-->
     <section class="page-section bg-primary" id="about">
         <div class="container px-4 px-lg-5">
@@ -78,11 +82,13 @@
         </div>
     </section>
     <!-- section pulsante -->
-    <section id="pulseSection" class="pulse-section">
+    <section class="pulsating-section" id="mySection">
         <h2>Seção de Destaque</h2>
-        <p>Esta seção está acionando o efeito de pulso e escurecimento!</p>
+        <p>Ao entrar na tela, você verá o efeito de pulso e escurecimento das bordas!</p>
+        <p>Este efeito só deve ocorrer uma vez.</p>
     </section>
-    <div id="overlayEffect" class="overlay-effect"></div>
+    <div class="overlay"></div>
+
     <!-- Contact-->
     <section class="page-section" id="contact">
         <div class="container px-4 px-lg-5">
@@ -187,6 +193,65 @@
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const section = document.getElementById('mySection');
+            const body = document.body;
+            const overlay = document.querySelector('.overlay');
+
+            // Opções para o Intersection Observer
+            const observerOptions = {
+                root: null, // O viewport é o root
+                rootMargin: '0px',
+                threshold: 0.5 // Aciona quando 50% da seção está visível
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // A seção está visível
+
+                        // 1. Aplica a classe para iniciar a animação de pulso
+                        body.classList.add('focus-active');
+
+                        // 2. Remove a classe logo após o tempo da animação (1.5s)
+                        //    para que o efeito não persista após o pulso e possa ser reativado
+                        setTimeout(() => {
+                            body.classList.remove('focus-active');
+                        }, 1500); // 1500ms = 1.5s (duração da animação em CSS)
+
+                        // Opcional: Para fazer o efeito rodar APENAS UMA VEZ, descomente a linha abaixo.
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            // Começa a observar a seção
+            observer.observe(section);
+
+            // Show/hide the floating back-to-index button after scrolling past the masthead
+            const masthead = document.querySelector('header.masthead');
+            const backBtn = document.getElementById('backToIndexBtn');
+            if (masthead && backBtn) {
+                const mastObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // masthead is visible -> hide the button
+                            backBtn.classList.remove('visible');
+                            backBtn.setAttribute('aria-hidden', 'true');
+                            backBtn.setAttribute('tabindex', '-1');
+                        } else {
+                            // masthead is not visible -> show the button
+                            backBtn.classList.add('visible');
+                            backBtn.setAttribute('aria-hidden', 'false');
+                            backBtn.removeAttribute('tabindex');
+                        }
+                    });
+                }, { root: null, threshold: 0 });
+                mastObserver.observe(masthead);
+            }
+        });
+    </script>
 </body>
 
 </html>

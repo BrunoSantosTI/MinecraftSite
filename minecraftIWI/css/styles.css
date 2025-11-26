@@ -11347,58 +11347,61 @@ header.masthead h1, header.masthead .h1 {
   flex-direction: row ;
 }
 
-.pulse-section {
-    height: 100vh;
-    background-color: #333;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    z-index: 10; /* Garante que o conteúdo fique por cima do overlay */
+/* Estilo para a seção principal com o efeito */
+.pulsating-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #1F4F5B !important;
+  text-shadow: #0dcaf0 0 1px 1px !important;
+  background-color: #0F1720;
+  position: relative;
+  z-index: 1; /* Garante que o conteúdo fique acima do overlay */
+  padding: 20px;
+}
+/* =========================================================
+ESTILOS DO EFEITO DE PULSO/ESCURECIMENTO
+=========================================================
+*/
+
+/* O elemento de overlay que criará o efeito de escurecimento */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permite interagir com o conteúdo por baixo */
+  z-index: 99; /* Fica acima de todo o conteúdo da página, exceto a seção em foco */
+  opacity: 0; /* Inicia transparente */
+  transition: opacity 0.5s ease-out; /* Suaviza a transição de opacidade */
+  
+  /* Cria o gradiente radial para escurecer as bordas */
+  background: radial-gradient(
+    circle at center,
+    transparent 10%, /* Centro transparente */
+    rgb(0, 0, 0) 100% /* Bordas escuras */
+  );
 }
 
-/* 🎨 Estilo do Overlay (a camada que escurece as bordas) */
-.overlay-effect {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9; /* Abaixo da seção */
-    pointer-events: none; /* Permite interagir com o conteúdo por baixo */
-    opacity: 0; /* Começa invisível */
-    transition: opacity 0.5s ease-in-out;
-    
-    /* Degradê Radial: Transparente no centro, Escuro/Preto nas bordas */
-    background: radial-gradient(
-        circle at center,
-        rgba(0, 0, 0, 0) 0%, /* Totalmente transparente no centro */
-        rgba(0, 0, 0, 0) 60%, /* Transparente até 60% */
-        rgba(0, 0, 0, 0.9) 100% /* Opacidade de 90% (quase preto) nas bordas */
-    );
+/* Estilo para quando a seção está visível (foco ativo) */
+.focus-active .overlay {
+  opacity: 1; /* Torna o overlay visível */
+  animation: pulse-fade 1.5s ease-out; /* Aplica a animação de pulso */
 }
 
-/* Classe ativada pelo JavaScript para mostrar e pulsar o overlay */
-.overlay-active {
-    opacity: 1; /* Torna o overlay visível */
-    animation: pulseGlow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Animação de pulso */
-}
-
-/* 🌟 Keyframes para o efeito "Pulsar" */
-@keyframes pulseGlow {
-    0% {
-        opacity: 0.8;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.01); /* Um pequeno aumento para simular pulso */
-    }
-    100% {
-        opacity: 0; /* Desaparece após o pulso */
-        transform: scale(1);
-    }
+/* Keyframes para o efeito de pulso */
+@keyframes pulse-fade {
+  0% { 
+      opacity: 0.2; /* Começa com um leve escurecimento */
+  }
+  50% { 
+      opacity: 1; /* Atinge o escurecimento máximo (o pulso) */
+  }
+  100% { 
+      opacity: 0; /* Desaparece rapidamente */
+  }
 }
