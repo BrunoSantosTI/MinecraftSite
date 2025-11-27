@@ -7715,8 +7715,6 @@ textarea.form-control-lg {
 
 .mb-4 {
   margin-bottom: 1.5rem !important;
-  color: #1F4F5B !important;
-  text-shadow: #0dcaf0 0 1px 1px !important;
 }
 
 .mb-5 {
@@ -11404,4 +11402,9 @@ ESTILOS DO EFEITO DE PULSO/ESCURECIMENTO
   100% { 
       opacity: 0; /* Desaparece rapidamente */
   }
+}
+
+.deepdark-destaque{
+  color: #1F4F5B !important;
+  text-shadow: #0dcaf0 0 1px 1px !important;
 }
